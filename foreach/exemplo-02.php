@@ -1,4 +1,6 @@
-// O formulário abaixo não possui definido action nem method, logo assume os valores padrão: executado na própria página e método é o $_GET.
+<!-- 
+    O formulário abaixo não possui definido action nem method, logo assume os valores padrão: executado na própria página e método é o $_GET. 
+-->
 <form>
     <input type="text" name="nome" />
     <input type="date" name="nascimento" />
