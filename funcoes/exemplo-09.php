@@ -39,9 +39,11 @@
                                 array(
                                     'nome_cargo'    => 'Supervisor de suprimentos',
                                     'subordinados'   => array(
+                                        // Início: Funcionário
                                         array(
-                                            'nome_cargo'    => 'Chinelão'
+                                            'nome_cargo'    => 'Funcionário'
                                         )
+                                        // Término: Funcionário
                                     )
                                 )
                                 // Término: Supervisor de suprimentos
