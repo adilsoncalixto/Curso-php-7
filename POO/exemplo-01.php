@@ -12,6 +12,5 @@
     // seta um atributo desta classe
     $alexandre->nome = "Alexandre Lima";
     // utiliza o método falar
-    echo $alexandre->falar();
-    
+    echo $alexandre->falar();    
 ?>
