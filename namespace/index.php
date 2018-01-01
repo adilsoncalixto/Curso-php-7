@@ -7,5 +7,4 @@
 	$cad->setSenha("123456");
 	
 	$cad->registrarVenda();
-
 ?>
