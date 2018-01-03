@@ -131,6 +131,11 @@
 			}
 		}
 
+		/**
+		 * [update Atualiza dados da tabela]
+		 * @param  [String] $deslogin [login para atualizar]
+		 * @param  [String] $dessenha [senha para atualizar]
+		 */
 		public function update($deslogin, $dessenha){
 			$this->setDeslogin($deslogin);
 			$this->setDessenha($dessenha);
@@ -140,6 +145,17 @@
 				':dessenha'=>$this->getDessenha(),
 				':idusuario'=>$this->getIdusuario()
 			));
+		}
+
+		public function delete(){
+			$sql = new Sql();
+			$sql->query("DELETE FROM tb_usuarios WHERE idusuario = :idusuario", array(
+				':idusuario'=>$this->getIdusuario()
+			));
+			$this->setIdusuario(null);
+			$this->setDeslogin(null);
+			$this->setDessenha(null);
+			$this->setDtcadastro(new DateTime());
 		}
 
 		///////////////////////

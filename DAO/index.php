@@ -53,13 +53,21 @@
 	// Testa o método update //
 	///////////////////////////
 
+	// $usuario = new Usuario();
+
+	//$usuario->loadById(38);
+
+	//$usuario->update("Andy", "peer-to-peer");
+
+	//echo $usuario;
+
+	///////////////////////////
+	// testa a classe delete //
+	///////////////////////////
+
 	$usuario = new Usuario();
-
-	$usuario->loadById(38);
-
-	$usuario->update("Andy", "peer-to-peer");
-
+	$usuario->loadById(14);
+	$usuario->delete();
 	echo $usuario;
-
 
 ?>
