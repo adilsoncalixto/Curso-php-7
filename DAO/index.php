@@ -29,10 +29,10 @@
 	// Testa a classe que busca por usuário e senha //
 	//////////////////////////////////////////////////
 
-	$searchLogin = new Usuario();
+	//$searchLogin = new Usuario();
 
-	$searchLogin->searchLogin("Gabriela", "9137");
-	echo $searchLogin;
+	//$searchLogin->searchLogin("Gabriela", "9137");
+	//echo $searchLogin;
 
 	// Exemplo de erro
 
@@ -40,4 +40,12 @@
 	//$searchLogin->searchLogin("Gabriela", "9136");
 	//echo $searchLogin;
 
+	///////////////////////////
+	// Testa o método insert //
+	///////////////////////////
+
+	$aluno = new Usuario("Alexandre", "a79s16l81");
+	$aluno->insert();
+
+	echo $aluno;
 ?>
