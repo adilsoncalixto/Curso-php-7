@@ -44,8 +44,22 @@
 	// Testa o método insert //
 	///////////////////////////
 
-	$aluno = new Usuario("Alexandre", "a79s16l81");
-	$aluno->insert();
+	//$aluno = new Usuario("Alexandre", "a79s16l81");
+	//$aluno->insert();
 
-	echo $aluno;
+	//echo $aluno;
+
+	///////////////////////////
+	// Testa o método update //
+	///////////////////////////
+
+	$usuario = new Usuario();
+
+	$usuario->loadById(38);
+
+	$usuario->update("Andy", "peer-to-peer");
+
+	echo $usuario;
+
+
 ?>

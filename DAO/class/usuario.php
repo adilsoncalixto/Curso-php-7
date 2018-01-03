@@ -58,9 +58,9 @@
 		 */
 		public function loadById($idusuario){
 			$sql = new Sql();
-			$result = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :idusuario", array(":idusuario"=>$idusuario));
-			if (count($result) > 0) {
-				$row = $result[0];
+			$results = $sql->select("SELECT * FROM tb_usuarios WHERE idusuario = :idusuario", array(":idusuario"=>$idusuario));
+			if (count($results) > 0) {
+				$row = $results[0];
 				$this->setData($results[0]);
 			}
 		}
@@ -129,6 +129,17 @@
 			if (count($results) > 0){
 				$this->setData($results[0]);
 			}
+		}
+
+		public function update($deslogin, $dessenha){
+			$this->setDeslogin($deslogin);
+			$this->setDessenha($dessenha);
+			$sql = new Sql();
+			$sql->query("UPDATE tb_usuarios SET deslogin = :deslogin, dessenha = :dessenha WHERE idusuario = :idusuario", array(
+				':deslogin'=>$this->getDeslogin(),
+				':dessenha'=>$this->getDessenha(),
+				':idusuario'=>$this->getIdusuario()
+			));
 		}
 
 		///////////////////////
