@@ -1,6 +1,25 @@
 <?php
 require_once("vendor/autoload.php");
 
+    // namespace
+    use Rain\Tpl;
+    // config
+    $config = array(
+        "tpl_dir"       => "tpl/",
+        "cache_dir"     => "cache/",
+        "debug"         => false, // set to false to improve the speed
+    );
+    Tpl::configure( $config );
+    // create the Tpl object
+    $tpl = new Tpl;
+    // assign a variable
+    $tpl->assign( "name", "AL Sites");
+    $tpl->assign( "version", PHP_VERSION);
+    // assign an array
+    //$tpl->assign( "week", array( "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" ) );
+    // draw the template
+    $html = $tpl->draw( "index", true);
+
 
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
@@ -10,7 +29,7 @@ require_once("vendor/autoload.php");
  */
 
 //Create a new PHPMailer instance
-$mail = new PHPMailer\PHPMailer\PHPMailer();
+$mail = new PHPMailer();
 
 //Tell PHPMailer to use SMTP
 $mail->isSMTP();
@@ -44,10 +63,10 @@ $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "coloque seu email @gmail.com";
+$mail->Username = "limaalexguitar@gmail.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "coloque sua senha";
+$mail->Password = "senhacorreta";
 
 //Set who the message is to be sent from
 $mail->setFrom('limaalexguitar@gmail.com', 'Alexandre Lima');
@@ -64,7 +83,7 @@ $mail->Subject = 'Testando a classe PHPmailer com Gmail - Alexandre Lima';
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+$mail->msgHTML($html);
 
 //Replace the plain text body with one created manually
 $mail->AltBody = 'This is a plain-text message body';

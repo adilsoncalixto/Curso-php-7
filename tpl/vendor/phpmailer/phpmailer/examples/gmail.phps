@@ -1,32 +1,29 @@
 <?php
-require_once("vendor/autoload.php");
-
-
 /**
  * This example shows settings to use when sending via Google's Gmail servers.
- * This uses traditional id & password authentication - look at the gmail_xoauth.phps
- * example to see how to use XOAUTH2.
  * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
  */
 
+//SMTP needs accurate times, and the PHP time zone MUST be set
+//This should be done in your php.ini, but this is how to do it if you don't have access to that
+date_default_timezone_set('Etc/UTC');
+
+require '../PHPMailerAutoload.php';
+
 //Create a new PHPMailer instance
-$mail = new PHPMailer\PHPMailer\PHPMailer();
+$mail = new PHPMailer;
 
 //Tell PHPMailer to use SMTP
 $mail->isSMTP();
-$mail->SMTPOptions = array(
-    'ssl' => array(
-        'verify_peer' => false,
-        'verify_peer_name' => false,
-        'allow_self_signed' => true
-    )
- );
 
 //Enable SMTP debugging
 // 0 = off (for production use)
 // 1 = client messages
 // 2 = client and server messages
 $mail->SMTPDebug = 2;
+
+//Ask for HTML-friendly debug output
+$mail->Debugoutput = 'html';
 
 //Set the hostname of the mail server
 $mail->Host = 'smtp.gmail.com';
@@ -44,33 +41,32 @@ $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "coloque seu email @gmail.com";
+$mail->Username = "username@gmail.com";
 
 //Password to use for SMTP authentication
-$mail->Password = "coloque sua senha";
+$mail->Password = "yourpassword";
 
 //Set who the message is to be sent from
-$mail->setFrom('limaalexguitar@gmail.com', 'Alexandre Lima');
+$mail->setFrom('from@example.com', 'First Last');
 
 //Set an alternative reply-to address
-//$mail->addReplyTo('replyto@example.com', 'First Last');
+$mail->addReplyTo('replyto@example.com', 'First Last');
 
 //Set who the message is to be sent to
-$mail->addAddress('contato@alsites.com.br', 'AL Sites');
-$mail->addAddress('suporte@hcode.com.br', 'Suporte Hcode');
+$mail->addAddress('whoto@example.com', 'John Doe');
 
 //Set the subject line
-$mail->Subject = 'Testando a classe PHPmailer com Gmail - Alexandre Lima';
+$mail->Subject = 'PHPMailer GMail SMTP test';
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-$mail->msgHTML(file_get_contents('contents.html'), __DIR__);
+$mail->msgHTML(file_get_contents('contents.html'), dirname(__FILE__));
 
 //Replace the plain text body with one created manually
 $mail->AltBody = 'This is a plain-text message body';
 
 //Attach an image file
-//$mail->addAttachment('images/phpmailer_mini.png');
+$mail->addAttachment('images/phpmailer_mini.png');
 
 //send the message, check for errors
 if (!$mail->send()) {
@@ -89,8 +85,7 @@ if (!$mail->send()) {
 //Function to call which uses the PHP imap_*() functions to save messages: https://php.net/manual/en/book.imap.php
 //You can use imap_getmailboxes($imapStream, '/imap/ssl') to get a list of available folders or labels, this can
 //be useful if you are trying to get this working on a non-Gmail IMAP server.
-function save_mail($mail)
-{
+function save_mail($mail) {
     //You can change 'Sent Mail' to any other folder or tag
     $path = "{imap.gmail.com:993/imap/ssl}[Gmail]/Sent Mail";
 
@@ -102,5 +97,3 @@ function save_mail($mail)
 
     return $result;
 }
-
-?>
